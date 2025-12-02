@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    
+    // 关键修改：关闭严格模式，允许快速开发
+    "strict": false,
+    
+    // 关键修改：允许库文件检查跳过，防止依赖包报错
+    "skipLibCheck": true,
+    
+    // 关键修改：关闭这个选项，解决 TS1295 报错
+    "verbatimModuleSyntax": false,
+    
+    // 允许导入 JSON (可选，防备用)
+    "resolveJsonModule": true
+  },
+  "include": ["monitor.ts"],
+  "exclude": ["node_modules"]
+}
