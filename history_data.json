@@ -1,7 +1,55 @@
 {
-  "lastUpdate": 1764698275449,
-  "lastScannedBlock": "106454000",
+  "lastUpdate": 1764707051221,
+  "lastScannedBlock": "106498500",
   "transactions": [
+    {
+      "hash": "5PGVLfsgXyLfaPSPobnFZ78q9ikMbsoMKSKz4Xy9K8HJ",
+      "sender": "Dr8KKYwjTcKzpMquGMtKdX5MxJaQHjpNjY1TYwWoEmee",
+      "buyAmount": 0,
+      "sellAmount": 50,
+      "timestamp": 1764704507608.196,
+      "version": "106485658"
+    },
+    {
+      "hash": "9ncnqTKnuYCG6Un8tL9svNmEEtm8aU9JzH53qCAWZpWq",
+      "sender": "Dr8KKYwjTcKzpMquGMtKdX5MxJaQHjpNjY1TYwWoEmee",
+      "buyAmount": 41.44132067,
+      "sellAmount": 0,
+      "timestamp": 1764701021636.225,
+      "version": "106467973"
+    },
+    {
+      "hash": "AJSMkFb38KukECva8F6MqisFqwvQezPGo6PVd9RE96ya",
+      "sender": "FYXBedXRGu2ePeJhYnHTUFeaAtjawD1NWWpZtamNoRxW",
+      "buyAmount": 32.73313752,
+      "sellAmount": 0,
+      "timestamp": 1764700479791.473,
+      "version": "106465201"
+    },
+    {
+      "hash": "4jDGvSTjNqQtv6ggjyBNsDCwKkwVjN1SuWKteSAFWcuW",
+      "sender": "FYXBedXRGu2ePeJhYnHTUFeaAtjawD1NWWpZtamNoRxW",
+      "buyAmount": 0,
+      "sellAmount": 50,
+      "timestamp": 1764700441963.022,
+      "version": "106465009"
+    },
+    {
+      "hash": "5i1kceL4yUmAX1xwwZpmYJAYhS4BbDd9eKWgow47yMyz",
+      "sender": "FYXBedXRGu2ePeJhYnHTUFeaAtjawD1NWWpZtamNoRxW",
+      "buyAmount": 87.02690621,
+      "sellAmount": 0,
+      "timestamp": 1764700403040.817,
+      "version": "106464812"
+    },
+    {
+      "hash": "71Eyj2VxsYLKb7GKPVpRPCZvqrnAHnvc86Kk4FYx7uqg",
+      "sender": "FYXBedXRGu2ePeJhYnHTUFeaAtjawD1NWWpZtamNoRxW",
+      "buyAmount": 0,
+      "sellAmount": 15,
+      "timestamp": 1764700361995.056,
+      "version": "106464596"
+    },
     {
       "hash": "9oz6JiYqYcKTFfE15CwihohXFtjp4Nm9VzDpjhVvEwZT",
       "sender": "4Fd6x8Qzdd2XLDwTLcPvteS68CvDSEKoJf2BwzikMmdo",
