@@ -1,7 +1,15 @@
 {
-  "lastUpdate": 1764694921580,
-  "lastScannedBlock": "106437000",
+  "lastUpdate": 1764698275449,
+  "lastScannedBlock": "106454000",
   "transactions": [
+    {
+      "hash": "9oz6JiYqYcKTFfE15CwihohXFtjp4Nm9VzDpjhVvEwZT",
+      "sender": "4Fd6x8Qzdd2XLDwTLcPvteS68CvDSEKoJf2BwzikMmdo",
+      "buyAmount": 0,
+      "sellAmount": 3000,
+      "timestamp": 1764696899980.646,
+      "version": "106447024"
+    },
     {
       "hash": "5H7K7VdE6pk4f4WaqEWbfxH33NaJsgaPUPhj7tZKCqEA",
       "sender": "4Fd6x8Qzdd2XLDwTLcPvteS68CvDSEKoJf2BwzikMmdo",
