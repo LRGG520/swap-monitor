@@ -49,12 +49,14 @@
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            background:
+            /* Background Texture */
+            background: 
                 radial-gradient(circle at 50% 0%, #1a1a2e 0%, #000000 60%),
                 url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='20' y='50' font-family='monospace' font-weight='bold' font-size='12' fill='%23222'%3E0x3f8a...%3C/text%3E%3Ctext x='150' y='100' font-family='monospace' font-size='10' fill='%231a1a1a'%3EEDS_PROTOCOL%3C/text%3E%3Ctext x='50' y='200' font-family='monospace' font-size='14' fill='%231a1a1a'%3EHASH_RATE%3C/text%3E%3Ctext x='220' y='250' font-family='monospace' font-size='10' fill='%23222'%3EGENESIS%3C/text%3E%3C/svg%3E");
             background-attachment: fixed;
         }
 
+        /* Button Styles */
         .btn-genesis-active {
             background-color: #ffffff; color: #000000; font-weight: 700; border: 1px solid #ffffff;
         }
@@ -65,6 +67,7 @@
             border-color: #666; color: #fff;
         }
 
+        /* Input Styles */
         .input-genesis {
             background-color: #0f0f11; border: 1px solid #333; color: white; font-family: 'JetBrains Mono', monospace; transition: all 0.3s;
         }
@@ -72,16 +75,19 @@
             border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); outline: none;
         }
 
+        /* Rank Highlighting */
         tr.rank-top-1 { background: linear-gradient(90deg, rgba(251, 191, 36, 0.1), transparent); border-left: 2px solid #fbbf24; }
         tr.rank-top-2 { background: linear-gradient(90deg, rgba(226, 232, 240, 0.05), transparent); border-left: 2px solid #e2e8f0; }
         tr.rank-top-3 { background: linear-gradient(90deg, rgba(180, 83, 9, 0.1), transparent); border-left: 2px solid #b45309; }
 
+        /* Animations */
         .mascot-float { animation: float 6s ease-in-out infinite; }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
 
+        /* Toast Notification */
         .toast {
             visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 10px; position: fixed; z-index: 100; left: 50%; bottom: 30px; transform: translateX(-50%); border: 1px solid #555; font-family: 'JetBrains Mono', monospace; font-size: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transition: opacity 0.3s;
         }
@@ -119,47 +125,198 @@
 
     <main class="max-w-[1280px] mx-auto px-6 mt-12 pb-20">
         
-        <script>
+        <div class="flex flex-col md:flex-row items-center justify-between mb-16 gap-10">
+            <div class="space-y-6 flex-1 text-center md:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-blue-900/30 bg-blue-900/10">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                    <span class="text-xs font-mono text-blue-400 font-bold tracking-wider">LIVE TRADING MONITOR</span>
+                </div>
+                
+                <div>
+                    <!-- Updated Title -->
+                    <h1 class="text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-4">
+                        Sliswap 7-Day <br> 
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Pre-Season Trading Event</span>
+                    </h1>
+                </div>
+                
+                <!-- Updated Subtitle -->
+                <p class="text-gray-400 text-lg max-w-xl font-light leading-relaxed">
+                    <span class="text-neon-buy font-bold text-xl drop-shadow-[0_0_10px_rgba(34,197,94,0.3)]">Win 2,000 USDT + Nessy NFT Whitelist</span>
+                </p>
+            </div>
+
+            <div class="relative w-full md:w-auto flex justify-center mascot-float">
+                <div class="absolute inset-0 bg-blue-500/20 blur-[60px] rounded-full"></div>
+                <div class="relative z-10 p-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl -rotate-3 hover:rotate-0 transition duration-500">
+                    <img src="image.png" alt="EDS Mascot" class="h-48 w-auto rounded-xl object-cover shadow-2xl">
+                    <div class="absolute -bottom-3 -right-3 bg-black border border-white/20 px-3 py-1 rounded text-xs font-mono font-bold">
+                        PRIZE POOL LIVE
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-surface border border-border rounded-lg p-6 relative overflow-hidden group hover:border-white/20 transition">
+                <div class="text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Total Volume</div>
+                <div class="text-3xl font-bold text-white mono tracking-tight" id="total-vol">--</div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-white/10 group-hover:bg-white/20 transition">
+                    <div class="h-full bg-white w-2/3"></div>
+                </div>
+            </div>
+
+            <div class="bg-surface border border-border rounded-lg p-6 relative overflow-hidden group hover:border-neon-buy/30 transition">
+                <div class="text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Buy Flow</div>
+                <div class="text-3xl font-bold text-neon-buy mono tracking-tight" id="total-buy">--</div>
+                <div class="text-xs text-neon-buy/50 mt-1 font-mono">INFLOW DETECTED</div>
+            </div>
+
+            <div class="bg-surface border border-border rounded-lg p-6 relative overflow-hidden group hover:border-neon-sell/30 transition">
+                <div class="text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Sell Flow</div>
+                <div class="text-3xl font-bold text-neon-sell mono tracking-tight" id="total-sell">--</div>
+                <div class="text-xs text-neon-sell/50 mt-1 font-mono">OUTFLOW DETECTED</div>
+            </div>
+
+            <div class="bg-surface border border-border rounded-lg p-6 relative overflow-hidden group hover:border-white/20 transition">
+                <div class="text-gray-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Traders Online</div>
+                <div class="flex items-baseline gap-2">
+                    <div class="text-3xl font-bold text-white mono tracking-tight" id="total-users">--</div>
+                    <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-between items-end gap-4 pb-4 border-b border-border">
+            <div class="flex flex-wrap gap-2 bg-surface p-1 rounded-lg border border-border">
+                <button onclick="setFilter('all', this)" class="btn-genesis-active px-5 py-2 rounded text-xs font-mono uppercase transition-all">All Time</button>
+                <button onclick="setFilter('7d', this)" class="btn-genesis-outline px-5 py-2 rounded text-xs font-mono uppercase transition-all">7D Horizon</button>
+                <button onclick="setFilter('24h', this)" class="btn-genesis-outline px-5 py-2 rounded text-xs font-mono uppercase transition-all">24H Race</button>
+                <button onclick="setFilter('1h', this)" class="btn-genesis-outline px-5 py-2 rounded text-xs font-mono uppercase transition-all">1H Blitz</button>
+            </div>
+            
+            <div class="w-full md:w-auto relative group">
+                <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 text-xs group-focus-within:text-accent transition"></i>
+                <input type="text" id="search-input" placeholder="SEARCH_ADDRESS::0x..." 
+                    class="input-genesis w-full md:w-80 pl-10 pr-4 py-2.5 rounded text-sm placeholder-gray-600">
+            </div>
+        </div>
+
+        <div class="min-h-[600px] relative bg-surface/30 rounded-b-lg">
+            <div id="table-loading" class="absolute inset-0 bg-black/80 z-20 flex flex-col items-center justify-center backdrop-blur-sm">
+                 <div class="text-white font-mono text-xs tracking-[0.3em] animate-pulse">ESTABLISHING UPLINK...</div>
+                 <div class="mt-4 w-32 h-0.5 bg-gray-800 overflow-hidden rounded-full">
+                    <div class="h-full bg-blue-500 animate-[shimmer_1s_infinite]"></div>
+                 </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse whitespace-nowrap md:whitespace-normal">
+                    <thead>
+                        <tr class="text-gray-500 text-xs font-bold uppercase tracking-wider border-b border-border">
+                            <th class="py-4 pl-6 font-mono w-24">Rank</th>
+                            <th class="py-4">Address</th>
+                            <th class="py-4 text-right">Buy Vol</th>
+                            <th class="py-4 text-right">Sell Vol</th>
+                            <th class="py-4 text-right pr-6">Total Vol</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body" class="text-sm font-medium text-gray-300 font-mono">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="empty-state" class="hidden flex flex-col items-center justify-center py-24 text-gray-600">
+                <i class="fa-solid fa-magnifying-glass mb-4 opacity-50 text-2xl"></i>
+                <p class="font-mono text-xs uppercase tracking-widest">/ No Trading Signals Found /</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="text-center text-gray-600 text-xs py-12 mt-20 border-t border-border font-mono">
+        <p>POWERED BY SLISWAP x ENDLESS NETWORK</p>
+        <p class="mt-2 opacity-50" id="last-updated">System Latency: 12ms | V9.5 Stable</p>
+    </footer>
+
+    <script>
+        // Formatting Utilities
         const fmt = (n) => new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
         const fmtInt = (n) => new Intl.NumberFormat('en-US').format(n);
-
+        
+        // State Variables
         let currentFilter = 'all';
         let rawData = [];
 
+        // === Interaction: Copy & Toast ===
+        function copyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    const toast = document.getElementById("toast");
+                    toast.classList.add("show");
+                    setTimeout(() => toast.classList.remove("show"), 2000);
+                }
+            } catch (err) {
+                console.error('Unable to copy', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        // === Core Data Fetch ===
         async function fetchData() {
             try {
                 const now = Date.now();
-                
-                // ✅ 修复：使用相对路径，自动匹配域名
+                // ✅ 部署环境：使用相对路径，让浏览器请求当前域名的 /api/leaderboard
                 let url = '/api/leaderboard';
-
+                
+                // Time Filters
                 if (currentFilter === '7d') url += `?start=${now - 604800000}`;
                 if (currentFilter === '24h') url += `?start=${now - 86400000}`;
                 if (currentFilter === '1h') url += `?start=${now - 3600000}`;
 
-                const res = await fetch(url);
-                if (!res.ok) throw new Error("API Offline");
-
+                const res = await fetch(url); 
+                
+                if (!res.ok) throw new Error("API Offline"); 
+                
                 const json = await res.json();
-
-                processData(json.top100, json.totalTraders);
-
+                
+                // Process Real Data
+                processData(json.top100, json.totalTraders, json.status || 'live');
+                
+                // Update Timestamp
+                const date = new Date();
+                document.getElementById('last-updated').innerText = `Last Updated: ${date.toLocaleTimeString()} | Status: Connected`;
                 document.getElementById('status-text').innerText = "LIVE FEED CONNECTED";
                 document.getElementById('status-dot').className = "relative inline-flex rounded-full h-2 w-2 bg-neon-buy";
 
-            } catch (e) {
+            } catch (e) { 
+                console.log("Backend offline, switching to DEMO MODE.");
+                const mockData = generateMockData();
+                processData(mockData, 1245, 'demo');
+                
                 document.getElementById('status-text').innerText = "DEMO / OFFLINE";
                 document.getElementById('status-text').className = "uppercase tracking-widest text-yellow-500";
                 document.getElementById('status-dot').className = "relative inline-flex rounded-full h-2 w-2 bg-yellow-500";
-
-                processData(generateMockData(), 1245);
             } finally {
                 document.getElementById('table-loading').classList.add('hidden');
             }
         }
 
-        function processData(traders, totalCount) {
+        // Data Processor
+        function processData(traders, totalCount, status) {
             rawData = traders || [];
+            
             const totalVol = rawData.reduce((a, b) => a + (b.totalVolume || 0), 0);
             const totalBuy = rawData.reduce((a, b) => a + (b.buyVolume || 0), 0);
             const totalSell = rawData.reduce((a, b) => a + (b.sellVolume || 0), 0);
@@ -186,21 +343,70 @@
             emptyState.classList.add('hidden');
 
             tbody.innerHTML = filtered.map((user, idx) => {
-                const shortAddr = user.address.substring(0, 6) + '...' + user.address.slice(-4);
+                let rankDisplay = `<span class="text-gray-600 font-mono">#${String(idx + 1).padStart(2, '0')}</span>`;
+                let rowClass = "hover:bg-white/5 transition border-b border-border/50 group animate-fade-in-up";
+                let animationStyle = `style="animation-delay: ${idx * 0.05}s"`;
+                let volClass = "text-white";
+                let icon = "";
+
+                if (idx === 0) { 
+                    rankDisplay = `<span class="text-rank-gold font-black text-lg">01</span>`; 
+                    rowClass += " rank-top-1 bg-yellow-500/5";
+                    volClass = "text-rank-gold font-bold";
+                    icon = `<i class="fa-solid fa-trophy text-rank-gold mr-2 text-xs"></i>`;
+                } else if (idx === 1) {
+                    rankDisplay = `<span class="text-rank-silver font-bold">02</span>`;
+                    rowClass += " rank-top-2 bg-slate-500/5";
+                    volClass = "text-rank-silver font-bold";
+                } else if (idx === 2) {
+                    rankDisplay = `<span class="text-rank-bronze font-bold">03</span>`;
+                    rowClass += " rank-top-3 bg-orange-900/5";
+                    volClass = "text-rank-bronze font-bold";
+                }
+
+                const shortAddr = user.address.substring(0, 6) + '...' + user.address.substring(user.address.length - 4);
 
                 return `
-                <tr class="border-b border-border/50">
-                    <td class="py-4 pl-6">#${idx + 1}</td>
-                    <td class="py-4">${shortAddr}</td>
-                    <td class="py-4 text-right text-neon-buy">+${fmt(user.buyVolume)}</td>
-                    <td class="py-4 text-right text-neon-sell">-${fmt(user.sellVolume)}</td>
-                    <td class="py-4 text-right pr-6 font-bold">${fmt(user.totalVolume)}</td>
+                <tr class="${rowClass}" ${animationStyle}>
+                    <td class="py-4 pl-6 align-middle">${icon}${rankDisplay}</td>
+                    <td class="py-4 align-middle">
+                        <button onclick="copyToClipboard('${user.address}')" 
+                            class="flex items-center gap-2 text-gray-400 group-hover:text-white transition bg-transparent group-hover:bg-white/10 px-2 py-1 rounded cursor-pointer border border-transparent group-hover:border-white/10">
+                            <span class="font-mono text-xs">${shortAddr}</span>
+                            <i class="fa-regular fa-copy text-[10px] opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </button>
+                    </td>
+                    <td class="py-4 text-right text-neon-buy font-mono align-middle font-medium">+${fmt(user.buyVolume)}</td>
+                    <td class="py-4 text-right text-neon-sell font-mono align-middle font-medium">-${fmt(user.sellVolume)}</td>
+                    <td class="py-4 text-right ${volClass} font-mono align-middle pr-6 font-bold">${fmt(user.totalVolume)}</td>
                 </tr>`;
             }).join('');
         }
 
+        // Filters
+        window.setFilter = (type, btn) => {
+            currentFilter = type;
+            document.querySelectorAll('button').forEach(b => {
+                if(b.classList.contains('btn-genesis-active') || b.classList.contains('btn-genesis-outline')) {
+                    b.className = 'btn-genesis-outline px-5 py-2 rounded text-xs font-mono uppercase transition-all';
+                }
+            });
+            btn.className = 'btn-genesis-active px-5 py-2 rounded text-xs font-mono uppercase transition-all shadow-[0_0_15px_rgba(255,255,255,0.3)]';
+            
+            document.getElementById('table-loading').classList.remove('hidden');
+            fetchData(); 
+        };
+
+        // Search Debounce
+        let searchTimeout;
+        document.getElementById('search-input').addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(renderTable, 300);
+        });
+
+        // Mock Data Generator
         function generateMockData() {
-            return Array.from({ length: 15 }, (_, i) => {
+            return Array.from({length: 15}, (_, i) => {
                 const vol = Math.random() * 50000 * (15 - i);
                 return {
                     address: '0x' + Math.random().toString(16).substr(2, 40),
@@ -208,13 +414,12 @@
                     sellVolume: vol * (0.3 + Math.random() * 0.4),
                     totalVolume: vol
                 };
-            }).sort((a, b) => b.totalVolume - a.totalVolume);
+            }).sort((a,b) => b.totalVolume - a.totalVolume);
         }
 
+        // Init
         fetchData();
         setInterval(fetchData, 3000);
-        </script>
-
-    </main>
+    </script>
 </body>
 </html>
