@@ -20,7 +20,7 @@ const EDS_ID = "ENDLESSsssssssssssssssssssssssssssssssssssss";
 const DECIMALS = 8;
 const DB_FILE = "history_data.json";
 // 🔴 只有第一次运行(没有存档时)才会用这个高度
-const GENESIS_START_HEIGHT = 104680000n; 
+const GENESIS_START_HEIGHT = 108106850n; 
 
 // ⚡ 性能配置
 const BATCH_SIZE = 100;   
